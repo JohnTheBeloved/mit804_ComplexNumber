@@ -14,37 +14,37 @@ public class Tester{
 		System.out.println("Please enter the complex expression to using format ?. add a + bi \n a = conjugate \n b = \n i = ");
 		String userInput = scanner.nextLine();
 		String[] inputParts = splitUserInput(userInput);
+		String arithmeticEntered = inputParts[0];
+		String complexExppressionEnteredEntered = inputParts[1];
 		String result = "";
 		if(inputParts.length == 1){
-			if(arithmetic == "mag"){
-				result = accumulator.getMagnitude();
-			}else if(arithmetic == "conj"){
-				result = arithmetic.getConjugate();
+			if(arithmeticEntered == "mag"){
+				result = accumulator.Magnitude();
+			}else if(arithmeticEntered == "conj"){
+				result = arithmeticEntered.Conjugate();
 			}else{
-				result = "arithmetic not understood";
+				result = "arithmeticEntered not understood";
 			}
 		}else if(inputParts.length == 2){
-				String complexExppression = new Complex(inputParts[1]); 
-				Complex complexObject = new Complex(complexExppression);
+				Complex complexExppressionEntered = new Complex(inputParts[1]);  
 				if(validUserInput(userInput))
-				{
-					String arithmetic = inputParts[0];
-					String complexExppressiom = inputParts[0];
-					 if(arithmetic == "mag"){
+				{ 
+					String complexExppressionEntered = inputParts[0];
+					 if(arithmeticEntered == "mag"){
 						result = complexObjectEntered.Magnitude();
-					}else if(arithmetic == "conj"){
+					}else if(arithmeticEntered == "conj"){
 						result = complexObjectEntered.Conjugate();
-					}else if(arithmetic == "add" || arithmetic == "+"){
-						String complexExppression = inputParts[1]; 
-						result = accumulator.add(complexObjectEntered);
-					}else if(arithmetic == "sub" || arithmetic == "-"){ 
-						result = accumulator.substract(complexObjectEntered);
-					}else if(arithmetic == "div" || arithmetic == "/"){  
+					}else if(arithmeticEntered == "add" || arithmeticEntered == "+"){
+						String complexExppressionEntered = inputParts[1]; 
+						result = accumulator.Add(complexObjectEntered);
+					}else if(arithmeticEntered == "sub" || arithmeticEntered == "-"){ 
+						result = accumulator.Substract(complexObjectEntered);
+					}else if(arithmeticEntered == "div" || arithmeticEntered == "/"){  
 						result = accumulator.divide(complexObjectEntered);
-					}else if(arithmetic == "mul" || arithmetic == "*"){ 
-						result = ""+accumulator.multiply(complexObjectEntered);
+					}else if(arithmeticEntered == "mul" || arithmeticEntered == "*"){ 
+						result = ""+accumulator.Multiply(complexObjectEntered);
 					}else{
-						result = "arithmetic not understood";
+						result = "arithmeticEntered not understood";
 					}
 		
 				}
@@ -55,6 +55,11 @@ public class Tester{
 		 System.out.println("Your result is " + result);
 		 
 
+	}
+
+	private static boolean validUserInput(String input){
+		//Validation logic here
+		return true;
 	}
 
 
