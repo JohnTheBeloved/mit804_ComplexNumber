@@ -15,34 +15,32 @@ public class Tester{
 		String userInput = scanner.nextLine();
 		String[] inputParts = splitUserInput(userInput);
 		String arithmeticEntered = inputParts[0];
-		String complexExppressionEnteredEntered = inputParts[1];
+		String complexExppressionStringEntered = inputParts[1];
 		String result = "";
 		if(inputParts.length == 1){
 			if(arithmeticEntered == "mag"){
 				result = accumulator.Magnitude();
 			}else if(arithmeticEntered == "conj"){
-				result = arithmeticEntered.Conjugate();
+				result = accumulator.Conjugate();
 			}else{
 				result = "arithmeticEntered not understood";
 			}
 		}else if(inputParts.length == 2){
-				Complex complexExppressionEntered = new Complex(inputParts[1]);  
+				Complex complexExppression = new Complex(complexExppressionStringEntered);  
 				if(validUserInput(userInput))
-				{ 
-					String complexExppressionEntered = inputParts[0];
+				{  
 					 if(arithmeticEntered == "mag"){
-						result = complexObjectEntered.Magnitude();
+						result = complexExppression.Magnitude();
 					}else if(arithmeticEntered == "conj"){
-						result = complexObjectEntered.Conjugate();
+						result = complexExppression.Conjugate();
 					}else if(arithmeticEntered == "add" || arithmeticEntered == "+"){
-						String complexExppressionEntered = inputParts[1]; 
-						result = accumulator.Add(complexObjectEntered);
+						 result = accumulator.Add(complexExppression).toString();
 					}else if(arithmeticEntered == "sub" || arithmeticEntered == "-"){ 
-						result = accumulator.Substract(complexObjectEntered);
+						result = accumulator.Substract(complexExppression).toString();
 					}else if(arithmeticEntered == "div" || arithmeticEntered == "/"){  
-						result = accumulator.divide(complexObjectEntered);
+						result = accumulator.Divide(complexExppression).toString();
 					}else if(arithmeticEntered == "mul" || arithmeticEntered == "*"){ 
-						result = ""+accumulator.Multiply(complexObjectEntered);
+						result = accumulator.Multiply(complexExppression).toString();
 					}else{
 						result = "arithmeticEntered not understood";
 					}

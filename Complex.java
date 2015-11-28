@@ -25,12 +25,12 @@ public final class Complex{
 		return Math.atan2(imaginaryPart,realPart);
 	}
 
-	public Complex Conjugate(Complex complexNumber){
-		return new Complex(realPart,imaginaryPart);
+	public String Conjugate(){
+		return new Complex(realPart,imaginaryPart).toString();
 	}
 
-	public Complex Magnitude(Complex complexNumber){
-		return new Complex(realPart,imaginaryPart);
+	public String Magnitude(){
+		return new Complex(realPart,imaginaryPart).toString();
 	}
 
 	/**
