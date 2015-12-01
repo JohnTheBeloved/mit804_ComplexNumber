@@ -105,6 +105,45 @@ public final class Complex{
 
 	}
 
+	public static Complex parse(String commandEntered){
+		 
+		char[] complexExpressionCharacters = commandEntered.toCharArray();
+		 
+		StringBuilder complexBuilder = new StringBuilder();
+
+		complexBuilder.append(complexExpressionCharacters[0]);
+
+		String firstCharacter = complexBuilder.toString();
+
+		complexBuilder.append(complexExpressionCharacters[1]).append(complexExpressionCharacters[2]);
+
+		String firstThreeCharacters = complexBuilder.toString();
+		String[] operations = {"add", "sub", "div", "sub"};
+
+		String firstArithmetic = "";
+		String firstComplexPart = "";
+		String firstComplexExpression = "";
+		String secondComplexExpression = "";
+
+		if(firstCharacter == "+" || firstCharacter == "-" || firstCharacter == "/" || firstCharacter == "*"){
+			firstArithmetic = firstCharacter;
+		}else if(Arrays.asList(oprations).contains(firstThreeCharacters)){
+			firstArithmetic = firstCharacter;
+		}else if(firstThreeCharacters == "mag" || firstThreeCharacters == "ang" || firstThreeCharacters == "cnj"){
+			firstComplexPart = firstThreeCharacters;
+		}else{
+
+			if(firstCharacter == "j"){ 
+				firstComplexExpression = "0 + " + commandEntered.substring(0, commandEntered.indexOf(" "));
+			}else if(Character.isDigit(firstCharacter)){
+				firstComplexExpression = commandEntered.substring(0, commandEntered.indexOf(" ");
+			}
+		}
+
+
+
+	}
+
 	private String complexNumRep(double realNumber,double imaginaryNumber){
 
 		if (realNumber!=0 && imaginaryNumber>0) {
