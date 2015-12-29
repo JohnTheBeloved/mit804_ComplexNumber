@@ -1,168 +1,201 @@
-public final class Complex{
-	
-	private final double realPart;
-	private final double imaginaryPart;
+/**
+ * File: Complex.java
+ * -------------------
+ * Implements a new abstraction for manipulating complex numbers.
+ */
 
-	public Complex(double realPart, double imaginaryPart){
+
+public class Complex 
+{
+	private double realPart;
+	private double imaginaryPart;
+
+    /**
+     * Constructor: Complex
+     * Usage: Complex complex = new Complex();
+     * --------------------------------------
+     * Initializes a new empty Complex object.
+     * @Author: 
+     */
+
+
+    public Complex()
+	{
+		this.realPart = 0;
+		this.imaginaryPart = 0;
+	}
+
+
+    /**
+     * Constructor: Complex
+     * Usage: Complex complex = new Complex(realPart, imaginaryPart);
+     * --------------------------------------------------------------
+     * Initializes a new empty Complex object.
+     * @Author: 
+     */
+
+
+	public Complex(double realPart, double imaginaryPart)
+	{
 		this.realPart = realPart;
-		this.imaginaryPart  = imaginaryPart;
+		this.imaginaryPart = imaginaryPart;
 	}
 
-	public Complex(String complexExpression){
-		this.realPart = 2;
-		this.imaginaryPart  = 3;
+  
+    /**
+     * Method: add
+     * Usage: Complex complex = complex1.add(complex2);
+     * ------------------------------------------------
+     * @return complex The result of adding operand complex1 and operand complex2.
+     * @Author:
+     */
+
+	public Complex add(Complex complex)
+	{
+		return new Complex(complex.realPart + this.realPart, complex.imaginaryPart + this.imaginaryPart);
 	}
 
-	public double getRealPart(){
-		return realPart;
+
+	/**
+     * Method: sub
+     * Usage: Complex complex = complex1.sub(complex2);
+     * ------------------------------------------------
+     * @return complex The result of subtracting operand complex2 from operand complex2.
+     * @Author:
+     */
+
+	public Complex sub(Complex complex)
+	{
+		return new Complex(complex.realPart - this.realPart, complex.imaginaryPart - this.imaginaryPart);
 	}
 
-	public double getImaginaryPart(){
-		return imaginaryPart;
+    
+    /**
+     *  Method: multiply
+     *  Usage: Complex complex = complex1.multiply(complex2);
+     * -------------------------------------------------------
+     * @param complex The product of complex1 and complex2.
+     */
+
+	public Complex multiply(Complex complex)
+	{
+		double operand1, operand2, operand3, operand4;
+
+
+		operand1 = complex.realPart * this.realPart;
+		operand2 = complex.realPart * this.imaginaryPart;
+
+		operand3 = complex.imaginaryPart * this.realPart;
+		operand4 = complex.imaginaryPart * this.imaginaryPart;
+
+
+		//Simplify and group the four operands into 3, 1.e operand1, operand2, operand3
+		//Operand1 retains its state.
+
+	    operand2 = operand2 + operand3;
+	    operand3 = operand4 * -1;
+
+	    this.realPart = operand1 + operand3;
+	    this.imaginaryPart = operand2;
+
+	    return this;
 	}
 
-	public double Angle(){
-		return Math.atan2(imaginaryPart,realPart);
+
+	/**
+     *  Method: divide
+     *  Usage: Complex complex = complex1.divide(complex2);
+     * -------------------------------------------------------
+     * @param complex The result of dividing operand complex1 by operand complex2.
+     * @Author:
+     */
+
+    public Complex divide(Complex complex)
+    {
+    	Complex conjugateComplex = conjugate(complex); //Conjugate of numerator
+    	Complex numerator = this.multiply(conjugateComplex);
+    	Complex denomenator = complex.multiply(conjugateComplex);
+    	return new Complex(numerator.realPart / denomenator.realPart, numerator.imaginaryPart / denomenator.realPart);
+    }
+
+
+    /**
+     * Class Method: conjugate
+     * Usage: Complex complex = Complex.conjugate(complex);
+     * ----------------------------------------------------
+     * @Return complex The conjugate complex of complex
+     * @Author: 
+     */
+
+	public static Complex conjugate(Complex complex)
+	{
+		return new Complex(complex.realPart, (complex.imaginaryPart) * -1);
 	}
 
-	public String Conjugate(){
-		return new Complex(realPart,imaginaryPart).toString();
-	}
 
-	public String Magnitude(){
-		return new Complex(realPart,imaginaryPart).toString();
+
+    /**
+     * Class Method: angle
+     * Usage: double angle = angle(complex);
+     * -------------------------------------
+     * @return angle The angle of complex
+     * @author: 
+     */
+
+	public static double angle(Complex complex)
+	{
+		return Math.atan2(complex.imaginaryPart, complex.realPart);
 	}
 
 	/**
-	*Add complex number Parameter to this conjugate
-	*/
-	public Complex Add(Complex complex){
+     * Class Method: magnitude
+     * Usage: double magnitude = magnitude(complex);
+     * --------------------------------------------
+     * @return magnitude The magnitude of complex
+     * @author: 
+     */
 
-		Complex addedComplex = new Complex(realPart+complex.getRealPart(),imaginaryPart+complex.getImaginaryPart());
-		return addedComplex;
-		//System.out.println("\n Sum of complex numbers " + realPart + "+" + imaginaryPart + "i and "  + complex.getRealPart() + "+" + complex.getImaginaryPart() + "i is "  + addedComplex.toString());
-	
+	public static double magnitude(Complex complex)
+	{
+		return Math.abs(Math.sqrt((Math.pow(complex.realPart, 2)) + (Math.pow(complex.imaginaryPart, 2))));
 	}
 
-	/**
-	*Substracts complex number Parameter to this conjugate
-	*/
-	public Complex Substract(Complex complex){
-
-		Complex substractedComplex = new Complex(this.realPart-complex.getRealPart(),this.imaginaryPart-complex.getImaginaryPart());
-		return substractedComplex; 
-	
-	}
 
 	/**
-	*
-	*/
-	public Complex Divide(Complex complexToDivide){
-			double modulus = Math.pow(complexToDivide.mod(),2);
-			Complex dividedComplex = new Complex(((realPart*complexToDivide.getRealPart()+imaginaryPart*complexToDivide.getImaginaryPart())/modulus),(imaginaryPart*complexToDivide.getRealPart()-realPart*complexToDivide.getImaginaryPart())/modulus);
-			return dividedComplex;
-	}
+	 * Method: toString
+	 * Usage: String complexStr = complex.toString();
+	 * -----------------------------------------------
+	 * @param complexStr The string equivalent of object complex.
+	 */
 
-	/**
-	*Multiplies two Complex numbers and returns the result
-	*/
-	public Complex Multiply(Complex complexToMultiply){
+	public String toString()
+	{	
+		//When a complex number is multiplied by its conjugate, the result is always a positive, real number:
 		
-		Complex productComplex = new Complex((realPart*complexToMultiply.getRealPart() - imaginaryPart*complexToMultiply.getImaginaryPart()), (realPart*complexToMultiply.getImaginaryPart() + imaginaryPart*complexToMultiply.getRealPart()));
-		return productComplex;
-
-	}
-// //
-// 	public double Add(Complex complexExpression){
-		
-// 	}
-
-// 	//
-// 	public double Substract(String complexExpression){
-			
-// 	}
-
-// 	//
-// 	public double Divide(String complexExpression){
-			
-// 	}
-
-// 	//
-// 	public double Multiply(String complexExpression){
-			
-// 	}
-
-	/**
-	*
-	*/
-	private double mod(){
-
-		if (realPart!=0 || imaginaryPart!=0) {
-            return Math.sqrt(realPart*realPart+imaginaryPart*imaginaryPart);
-        } else {
-            return 0d;
-        }
-
-	}
-
-	public static Complex parse(String commandEntered){
-		 
-		char[] complexExpressionCharacters = commandEntered.toCharArray();
-		 
-		StringBuilder complexBuilder = new StringBuilder();
-
-		complexBuilder.append(complexExpressionCharacters[0]);
-
-		String firstCharacter = complexBuilder.toString();
-
-		complexBuilder.append(complexExpressionCharacters[1]).append(complexExpressionCharacters[2]);
-
-		String firstThreeCharacters = complexBuilder.toString();
-		String[] operations = {"add", "sub", "div", "sub"};
-
-		String firstArithmetic = "";
-		String firstComplexPart = "";
-		String firstComplexExpression = "";
-		String secondComplexExpression = "";
-
-		if(firstCharacter == "+" || firstCharacter == "-" || firstCharacter == "/" || firstCharacter == "*"){
-			firstArithmetic = firstCharacter;
-		}else if(Arrays.asList(oprations).contains(firstThreeCharacters)){
-			firstArithmetic = firstCharacter;
-		}else if(firstThreeCharacters == "mag" || firstThreeCharacters == "ang" || firstThreeCharacters == "cnj"){
-			firstComplexPart = firstThreeCharacters;
-		}else{
-
-			if(firstCharacter == "j"){ 
-				firstComplexExpression = "0 + " + commandEntered.substring(0, commandEntered.indexOf(" "));
-			}else if(Character.isDigit(firstCharacter)){
-				firstComplexExpression = commandEntered.substring(0, commandEntered.indexOf(" ");
+		if (this.imaginaryPart == 0)
+		{
+			return String.format("%.1f", this.realPart);
+		}
+		// Pure imaginary number
+		else if (this.realPart == 0)
+		{
+			if (this.imaginaryPart < 0)
+			{
+			 	return String.format("- j%.1f", (this.imaginaryPart) * -1);
+			}
+			else
+			{
+				return String.format("j%.1f", this.imaginaryPart);
 			}
 		}
-
-
+		else if (this.imaginaryPart < 0)
+		{
+		 	return String.format("(%.1f - j%.1f)", this.realPart, (this.imaginaryPart) * -1);
+		}
+		else
+		{
+			return String.format("(%.1f + j%.1f)", this.realPart, this.imaginaryPart);
+		}
 
 	}
-
-	private String complexNumRep(double realNumber,double imaginaryNumber){
-
-		if (realNumber!=0 && imaginaryNumber>0) {
-            return realNumber+" + "+imaginaryNumber+"i";
-        }
-        if (realPart!=0 && imaginaryPart<0) {
-            return realNumber+" - "+(-imaginaryNumber)+"i";
-        }
-        if (imaginaryNumber==0) {
-            return String.valueOf(realNumber);
-        }
-        if (realNumber==0) {
-            return imaginaryNumber+"i";
-        }
-        return realNumber+" + i*"+imaginaryNumber;
-	}
-
-	public String toString(){
-		return complexNumRep(realPart,imaginaryPart);
-	}
-
 }
