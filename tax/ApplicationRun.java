@@ -1,14 +1,16 @@
+package tax;
+
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import java.util.StringTokenizer;
 
 /**
- * Created by johnthebeloved on 3/9/14.
+ * Created by John Alade.
  */
-public class Run {
+public class ApplicationRun {
 
     public static void main(String [] args){
-       Run taxcalculator = new Run();
+       ApplicationRun taxcalculator = new ApplicationRun();
        boolean restart = taxcalculator.restartReponse(taxcalculator.startApp());
        while(restart){
         restart= taxcalculator.restartReponse(taxcalculator.startApp());
@@ -46,11 +48,9 @@ public class Run {
                 taxable.setIncome(getEnteredIncome());
                 return "Tax : " + taxable.calculateTax();
         
-             }
+            }
         }
        
-
-
          income = getEnteredIncome();
         for(int i = 0; i< options.length;i++){
         Taxable taxable =null;
@@ -187,7 +187,7 @@ public class Run {
 }
 
     private boolean restartReponse(String message){
- return JOptionPane.showConfirmDialog(parentFrame,message +"\n Restart The Application?","Restart",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION;
+        return JOptionPane.showConfirmDialog(parentFrame,message +"\n Restart The Application?","Restart",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION;
     }
 
 

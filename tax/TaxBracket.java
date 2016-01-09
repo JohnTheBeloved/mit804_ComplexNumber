@@ -1,10 +1,12 @@
+package tax;
+
 /**
- * Created by johnthebeloved on 3/8/14.
+ * Created by John Alade.
  */
 public class TaxBracket {
-    double rate;
-    double lowerBound;
-    double upperBound;
+    private final double rate;
+    private double lowerBound;
+    private final double upperBound;
 
     public TaxBracket(int rate,double lowerBound,double upperBound){
         this.rate = (double)rate/100;
@@ -26,6 +28,7 @@ public class TaxBracket {
         return tax;
     }
 
+    @Override
     public String toString(){
         return "\t\tRate: "+rate+"\tLower Bound: "+lowerBound+"\tUpper Bound: "+upperBound;
     }

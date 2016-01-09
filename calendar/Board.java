@@ -1,14 +1,15 @@
+package calendar;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author johnthebeloved on 3/10/14.
  */
 public class Board  extends JPanel{
 
-    private List<Cell> cells;
+    private ArrayList<Cell> cells;
 
     private MyCalendar referenceCalendar;
     public Board(MyCalendar myCalendar){
@@ -20,9 +21,9 @@ public class Board  extends JPanel{
         int day=0;
         for(int i=0;i<42;i++){
             if(day>=31)day=0;
-            Cell cell= new Cell(0, 0);//myCalendar.getFirstWeekDayOfMonth() >= day?  new Cell(0, myCalendar.getDayOfMonth()): new Cell(++day, myCalendar.getDayOfMonth());
+            Cell cell= new Cell(0,0);//myCalendar.getFirstWeekDayOfMonth() >= day?  new Cell(0, myCalendar.getDayOfMonth()): new Cell(++day, myCalendar.getDayOfMonth());
             cells.add(cell);
-             add(cell);
+             
         }
         refreshCells();
     }

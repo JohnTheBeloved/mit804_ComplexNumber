@@ -36,7 +36,7 @@ public class TestCircles {
     private static Circles getNewCircle(){
         int size = getRandomInt(0,25,100);
         int loc = 1000;
-        return new Circles(getRandomInt(0,500,loc), getRandomInt(0,500,loc), size, size);
+        return new Circles(getRandomInt(0,500,loc), getRandomInt(0,500,loc), size);
     }
 
     }
